@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <!-- Book Cover Image -->
+    <ImageView
+        android:id="@+id/bookCoverImageView"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Book Cover" />
+
+    <!-- Book Details -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Book Title -->
+        <TextView
+            android:id="@+id/bookTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title: "
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <!-- Book Author -->
+        <TextView
+            android:id="@+id/bookAuthorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Author: "
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Book Genre -->
+        <TextView
+            android:id="@+id/bookGenreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Genre: "
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"/>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

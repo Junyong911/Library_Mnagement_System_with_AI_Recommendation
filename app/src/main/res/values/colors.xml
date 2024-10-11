@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="default_background">#EFEFEF</color>
+
+    <color name="fiction_color">#E3F2FD</color>
+    <color name="non_fiction_color">#C8E6C9</color>
+    <color name="science_color">#FFF9C4</color>
+    <color name="fantasy_color">#F3E5F5</color>
+    <color name="biography_color">#FFECB3</color>
+    <color name="mystery_color">#EDE7F6</color>
+    <color name="adventure_color">#FFCCBC</color>
+    <color name="historical_color">#D7CCC8</color>
+    <color name="inspirational_color">#FFCDD2</color>
+    <color name="literature_color">#F0F4C3</color>
+    <color name="reference_color">#C5E1A5</color>
+    <color name="short_stories_color">#FFAB91</color>
+    <color name="art_color">#B2DFDB</color>
+    <color name="business_color">#BCAAA4</color>
+    <color name="chick_lit_color">#FFCC80</color>
+    <color name="children_color">#F8BBD0</color>
+    <color name="christian_color">#B3E5FC</color>
+
+</resources>

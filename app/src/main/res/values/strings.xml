@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">test</string>
+
+
+        <string-array name="sort_options">
+            <item>Title</item>
+            <item>Author</item>
+            <item>Genre</item>
+        </string-array>
+
+        <string-array name="genre_array">
+            <item>Adventure</item>
+            <item>Art</item>
+            <item>Biography</item>
+            <item>Business</item>
+            <item>Chick-lit</item>
+            <item>Children</item>
+            <item>Christian</item>
+            <item>Fantasy</item>
+            <item>Fiction</item>
+            <item>Historical</item>
+            <item>Inspirational</item>
+            <item>Literature</item>
+            <item>Mystery</item>
+            <item>Non-fiction</item>
+            <item>Reference</item>
+            <item>Science</item>
+            <item>Short Stories</item>
+        </string-array>
+
+    <string-array name="user_book_list_sort_options">
+        <item>Title</item>
+        <item>Author</item>
+    </string-array>
+
+</resources>

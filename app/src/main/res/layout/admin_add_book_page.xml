@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ScrollView for the entire content -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- The rest of the layout inside the ScrollView -->
+            <!-- Top App Bar -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Back Arrow -->
+                <ImageButton
+                    android:id="@+id/backButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    android:contentDescription="Back" />
+
+                <!-- Title Centered in Toolbar -->
+                <TextView
+                    android:id="@+id/pageTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Book"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/black" />
+
+                <!-- Menu Icon -->
+                <ImageButton
+                    android:id="@+id/barcodeIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/baseline_qr_code_scanner_24"
+                    android:contentDescription="Barcode"
+                    android:layout_gravity="end" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <ImageView
+                android:id="@+id/bookCoverImageView"
+                android:layout_width="92dp"
+                android:layout_height="138dp"
+                android:layout_marginTop="72dp"
+                android:background="#F5EDE6"
+                android:contentDescription="Book Cover"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/titleLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/bookCoverImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+
+            <!-- Title Input -->
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Title"
+                android:background="@drawable/rounded_button_grey"
+                android:padding="10dp"
+                app:layout_constraintTop_toBottomOf="@id/titleLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+
+            <!-- Genre Label -->
+            <TextView
+                android:id="@+id/genreLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Genre"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/titleEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+
+            <Spinner
+                android:id="@+id/genreSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button_grey"
+                android:padding="10dp"
+                app:layout_constraintTop_toBottomOf="@id/genreLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+
+            <!-- Author Label -->
+            <TextView
+                android:id="@+id/authorLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Author"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/genreSpinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+
+            <!-- Author Input -->
+            <EditText
+                android:id="@+id/authorEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Author"
+                android:background="@drawable/rounded_button_grey"
+                android:padding="10dp"
+                app:layout_constraintTop_toBottomOf="@id/authorLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+
+            <!-- ISBN Label -->
+            <TextView
+                android:id="@+id/isbnLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="ISBN"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/authorEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+
+            <!-- ISBN Input -->
+            <EditText
+                android:id="@+id/isbnEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="ISBN"
+                android:background="@drawable/rounded_button_grey"
+                android:padding="10dp"
+                app:layout_constraintTop_toBottomOf="@id/isbnLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+
+            <!-- Description Label -->
+            <TextView
+                android:id="@+id/descriptionLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/isbnEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+
+            <!-- Description Input (Multi-line) -->
+            <EditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:background="@drawable/rounded_button_grey"
+                android:padding="10dp"
+                android:gravity="top"
+                android:minLines="4"
+                android:maxLines="6"
+                android:scrollbars="vertical"
+                android:inputType="textMultiLine"
+                app:layout_constraintTop_toBottomOf="@id/descriptionLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+
+            <!-- Add Book Button -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addBookButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Add Book"
+                android:background="@drawable/rounded_edit_text"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/descriptionEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/admin_menu_bar"
+        android:background="@drawable/menu_bar_color" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
