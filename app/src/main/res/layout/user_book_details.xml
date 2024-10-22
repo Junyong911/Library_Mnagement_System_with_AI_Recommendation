@@ -33,6 +33,27 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
             android:layout_gravity="center"
             android:textColor="@android:color/black" />
+
+        <ImageButton
+            android:id="@+id/bookmarkIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_bookmark_24"
+            android:contentDescription="Logout"
+            android:layout_gravity="end" />
+
+        <ImageButton
+            android:id="@+id/bookmarkAddedIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_bookmark_added_24"
+            android:contentDescription="Logout"
+            android:layout_gravity="end"
+            android:visibility="gone"/>
     </androidx.appcompat.widget.Toolbar>
 
     <!-- Scrollable Content -->

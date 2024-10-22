@@ -40,11 +40,12 @@ public class UserBookAdapter extends RecyclerView.Adapter<UserBookAdapter.BookVi
 
         // Fetch and display the book rating and rating count
         if (book.getRating() > 0 && book.getRatingsCount() > 0) {
-            holder.ratingTextView.setText(String.format("%.2f", book.getRating()) + " • " + book.getRatingsCount() + " ratings");
-            holder.bookRatingBar.setRating(book.getRating()); // Set rating in RatingBar
+            holder.ratingTextView.setText(String.format("%.2f", book.getRating()) );
+            holder.bookReviewsCount.setText(" • " + book.getRatingsCount() + " ratings");
+            //holder.bookRatingBar.setRating(book.getRating()); // Set rating in RatingBar
         } else {
             holder.ratingTextView.setText("No ratings yet");
-            holder.bookRatingBar.setRating(0); // Set default rating
+            //holder.bookRatingBar.setRating(0); // Set default rating
         }
 
         // Load the book cover image using Picasso
@@ -76,7 +77,7 @@ public class UserBookAdapter extends RecyclerView.Adapter<UserBookAdapter.BookVi
     public static class BookViewHolder extends RecyclerView.ViewHolder {
 
         ImageView bookCoverImageView;
-        TextView bookTitleTextView, bookAuthorTextView, ratingTextView;
+        TextView bookTitleTextView, bookAuthorTextView, ratingTextView, bookReviewsCount;
         RatingBar bookRatingBar; // Add RatingBar for average rating
 
         public BookViewHolder(@NonNull View itemView) {
@@ -85,7 +86,8 @@ public class UserBookAdapter extends RecyclerView.Adapter<UserBookAdapter.BookVi
             bookTitleTextView = itemView.findViewById(R.id.bookTitleTextView);
             bookAuthorTextView = itemView.findViewById(R.id.bookAuthorTextView);
             ratingTextView = itemView.findViewById(R.id.ratingTextView);
-            bookRatingBar = itemView.findViewById(R.id.bookRatingBar); // Initialize RatingBar
+            bookReviewsCount = itemView.findViewById(R.id.bookReviewsCount);
+            //bookRatingBar = itemView.findViewById(R.id.bookRatingBar); // Initialize RatingBar
         }
     }
 

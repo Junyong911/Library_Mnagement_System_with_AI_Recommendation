@@ -80,7 +80,19 @@
             android:textSize="14sp"
             android:textColor="@android:color/darker_gray"
             app:layout_constraintStart_toStartOf="@id/starIcon"
-             />
-
+            />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/borrowDateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="9dp"
+        android:text="Borrow Date"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/bookCoverImageView"
+        app:layout_constraintTop_toBottomOf="@id/ratingLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="by Author Name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

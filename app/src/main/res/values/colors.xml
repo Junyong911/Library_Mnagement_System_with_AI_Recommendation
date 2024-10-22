@@ -24,5 +24,6 @@
     <color name="chick_lit_color">#FFCC80</color>
     <color name="children_color">#F8BBD0</color>
     <color name="christian_color">#B3E5FC</color>
-
+    <color name="purple_500">#9C27B0</color>
+    <color name="teal_700">#00796B</color>
 </resources>

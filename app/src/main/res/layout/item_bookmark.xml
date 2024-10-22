@@ -37,36 +37,13 @@
         app:layout_constraintTop_toBottomOf="@id/bookTitleTextView"
         app:layout_constraintVertical_bias="0.0" />
 
-
-    <TextView
-        android:id="@+id/dueDateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4,380,404 ratings"
-        android:textSize="14sp"
-        android:textColor="@android:color/darker_gray"
-        android:layout_marginTop="2dp"
-        app:layout_constraintStart_toEndOf="@id/bookCoverImageView"
-        app:layout_constraintTop_toBottomOf="@id/bookAuthorTextView"/>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/returnButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/dueDateTextView"
-        app:layout_constraintStart_toEndOf="@id/bookCoverImageView"
-        android:layout_marginLeft="200dp"
-        android:text="Return">
-
-    </androidx.appcompat.widget.AppCompatButton>
-
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@+id/returnButton"
+        app:layout_constraintTop_toBottomOf="@+id/bookCoverImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

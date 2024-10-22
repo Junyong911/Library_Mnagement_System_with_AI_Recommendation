@@ -1,6 +1,6 @@
 package com.example.test;
 
-public class UserBorrowingHistory {
+public class UserBorrowingHistoryPermanent {
     private String borrowId;
     private String bookId;
     private long borrowTimestamp;
@@ -12,12 +12,12 @@ public class UserBorrowingHistory {
     private String bookGenre;
 
     // Default constructor required for Firebase
-    public UserBorrowingHistory() {
+    public UserBorrowingHistoryPermanent() {
     }
 
-    public UserBorrowingHistory(String borrowId, String bookId, long borrowTimestamp,
-                                String bookTitle, String bookAuthor, String bookRating,
-                                String bookReviewsCount, String bookCoverUrl, String bookGenre) {
+    public UserBorrowingHistoryPermanent(String borrowId, String bookId, long borrowTimestamp,
+                                         String bookTitle, String bookAuthor, String bookRating,
+                                         String bookReviewsCount, String bookCoverUrl, String bookGenre) {
         this.borrowId = borrowId;
         this.bookId = bookId;
         this.borrowTimestamp = borrowTimestamp;
@@ -28,7 +28,6 @@ public class UserBorrowingHistory {
         this.bookCoverUrl = bookCoverUrl;
         this.bookGenre = bookGenre;
     }
-
     public String getBookGenre() {
         return bookGenre;
     }
@@ -37,6 +36,7 @@ public class UserBorrowingHistory {
         this.bookGenre = bookGenre;
     }
 
+    // Getters and setters for the fields
     public String getBookTitle() {
         return bookTitle;
     }
@@ -78,8 +78,6 @@ public class UserBorrowingHistory {
     }
 
     // Existing getters and setters...
-
-    // Getters and Setters
     public String getBorrowId() {
         return borrowId;
     }
