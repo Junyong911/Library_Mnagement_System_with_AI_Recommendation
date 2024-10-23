@@ -28,8 +28,8 @@ import java.util.Map;
 public class AdminHomePage extends AppCompatActivity {
 
     private ImageButton addBookButton, inventoryButton, logoutIcon, scanButton;
-    private CardView totalBooksCard;
-    private TextView totalBooksCountTextView;
+    private CardView totalBooksCard, borrowDashboardButton;
+    private TextView totalBooksCountTextView, borrowBooksCountTextView;
     private FirebaseAuth mAuth;
 
     @Override
@@ -46,10 +46,23 @@ public class AdminHomePage extends AppCompatActivity {
         scanButton = findViewById(R.id.scanButton);
         totalBooksCard = findViewById(R.id.totalBooksCard);
         totalBooksCountTextView = findViewById(R.id.totalBooksCount);
+        borrowBooksCountTextView = findViewById(R.id.borrowBooksCount);
         logoutIcon = findViewById(R.id.logoutIcon); // Initialize the logout icon
 
         // Load total books from the database
         loadTotalBooksCount();
+        loadTotalBorrowRecordsCount();
+
+        borrowDashboardButton = findViewById(R.id.borrowBooksCard);
+
+        borrowDashboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to AdminBorrowDashboardActivity
+                Intent intent = new Intent(AdminHomePage.this, AdminBorrowDashboard.class);
+                startActivity(intent);
+            }
+        });
 
         // Set up the onClick listener for Total Books card
         totalBooksCard.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +166,26 @@ public class AdminHomePage extends AppCompatActivity {
 
                         // Update the TextView with the total number of books
                         totalBooksCountTextView.setText(String.valueOf(totalBooksCount));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle possible errors
+                    }
+                });
+    }
+
+    // Load total borrow records count
+    private void loadTotalBorrowRecordsCount() {
+        FirebaseDatabase.getInstance().getReference("BorrowRecords")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        // Get the total number of borrow records from the snapshot
+                        long totalBorrowCount = dataSnapshot.getChildrenCount();
+
+                        // Update the TextView with the total number of borrow records
+                        borrowBooksCountTextView.setText(String.valueOf(totalBorrowCount));
                     }
 
                     @Override

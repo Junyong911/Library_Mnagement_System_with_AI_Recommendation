@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:text="Total Books"
                     android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:id="@+id/totalBooksCount"
@@ -89,7 +89,7 @@
 
         <!-- Issued Books Card -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/issuedBooksCard"
+            android:id="@+id/borrowBooksCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -105,16 +105,16 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/issuedBooksTitle"
+                    android:id="@+id/borrowBooksTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Issued Books"
+                    android:text="Borrow Records"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:textSize="16sp"/>
 
                 <TextView
-                    android:id="@+id/issuedBooksCount"
+                    android:id="@+id/borrowBooksCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1.2k"

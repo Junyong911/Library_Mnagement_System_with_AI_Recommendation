@@ -41,8 +41,7 @@ public class UserMyBooksPage extends AppCompatActivity {
                         selectedFragment = new BorrowedBooksFragment(); // Show Borrowed Books
                         break;
                     case 1:
-                        // You can create a RecommendFragment for recommendations
-                        //selectedFragment = new RecommendFragment();
+                        selectedFragment = new RecommendFragment(); // Show Borrowed Books
                         break;
                     case 2:
                         selectedFragment = new BookmarkFragment(); // Show Borrowed Books

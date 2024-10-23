@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +27,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class UserHomePage extends AppCompatActivity {
 
@@ -38,6 +45,10 @@ public class UserHomePage extends AppCompatActivity {
     private ImageButton logoutIcon;
     private LinearLayout homePageLayout;
     private DatabaseReference userNotificationsRef;
+    private RecyclerView recyclerViewPopularBooks;
+    private PopularBookAdapter popularBooksAdapter;
+    private List<Book> popularBooksList;
+    private DatabaseReference booksRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +92,56 @@ public class UserHomePage extends AppCompatActivity {
         });
 
 
+
+        recyclerViewPopularBooks = findViewById(R.id.recyclerViewPopularBooks);
+        recyclerViewPopularBooks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        popularBooksList = new ArrayList<>();
+        popularBooksAdapter = new PopularBookAdapter(popularBooksList, this);
+        recyclerViewPopularBooks.setAdapter(popularBooksAdapter);
+
+        // Fetch popular books
+        fetchPopularBooks();
+
+
+    }
+
+    private void fetchPopularBooks() {
+        booksRef = FirebaseDatabase.getInstance().getReference("Books");
+        booksRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                popularBooksList.clear(); // Clear previous data
+
+                for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {
+                    Book book = bookSnapshot.getValue(Book.class);
+
+                    if (book != null) {
+                        popularBooksList.add(book);
+                    }
+                }
+
+                // Sort by rating and get the top 5 highest-rated books
+                Collections.sort(popularBooksList, new Comparator<Book>() {
+                    @Override
+                    public int compare(Book book1, Book book2) {
+                        return Float.compare(book2.getRating(), book1.getRating()); // Sort in descending order
+                    }
+                });
+
+                // Make sure to limit the list to exactly 5 books
+                if (popularBooksList.size() > 5) {
+                    popularBooksList = new ArrayList<>(popularBooksList.subList(0, 5));
+                }
+
+                popularBooksAdapter.notifyDataSetChanged(); // Notify adapter of data changes
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(UserHomePage.this, "Failed to load popular books.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void startImageSlider() {
