@@ -66,7 +66,7 @@ public class UserBorrowBookPage extends AppCompatActivity {
         String title = intent.getStringExtra("bookTitle");
         String author = intent.getStringExtra("bookAuthor");
         String rating = intent.getStringExtra("bookRating");
-        String coverUrl = intent.getStringExtra("imageUrl");
+        String coverUrl = intent.getStringExtra("bookCoverUrl");
         String status = intent.getStringExtra("status");
         String genre = intent.getStringExtra("bookGenre");
 

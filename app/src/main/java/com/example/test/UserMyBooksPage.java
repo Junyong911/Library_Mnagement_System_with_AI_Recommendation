@@ -75,8 +75,7 @@ public class UserMyBooksPage extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId() == R.id.book) {
                     // Navigate to Book Page
-                    Intent intent = new Intent(UserMyBooksPage.this, UserMyBooksPage.class);
-                    startActivity(intent);
+
                 } else if (item.getItemId() == R.id.search) {
                     // Navigate to Search Page
                     Intent intent = new Intent(UserMyBooksPage.this, UserSearchPage.class);

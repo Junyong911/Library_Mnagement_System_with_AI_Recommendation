@@ -28,7 +28,7 @@ import java.util.Map;
 public class AdminHomePage extends AppCompatActivity {
 
     private ImageButton addBookButton, inventoryButton, logoutIcon, scanButton;
-    private CardView totalBooksCard, borrowDashboardButton;
+    private CardView totalBooksCard, borrowDashboardButton, overdueBooksCard;
     private TextView totalBooksCountTextView, borrowBooksCountTextView;
     private FirebaseAuth mAuth;
 
@@ -54,6 +54,16 @@ public class AdminHomePage extends AppCompatActivity {
         loadTotalBorrowRecordsCount();
 
         borrowDashboardButton = findViewById(R.id.borrowBooksCard);
+        overdueBooksCard = findViewById(R.id.overdueBooksCard);
+
+        overdueBooksCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to AdminBorrowDashboardActivity
+                Intent intent = new Intent(AdminHomePage.this, AdminOverdueDashboard.class);
+                startActivity(intent);
+            }
+        });
 
         borrowDashboardButton.setOnClickListener(new View.OnClickListener() {
             @Override

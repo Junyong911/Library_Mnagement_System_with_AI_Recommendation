@@ -148,7 +148,7 @@ public class UserBookDetails extends AppCompatActivity {
             // Pass the book details to the borrow page
             intent1.putExtra("bookTitle", title); // Pass the book title
             intent1.putExtra("bookAuthor", author);
-            intent1.putExtra("bookGenre", genre);// Pass the book author
+            intent1.putExtra("bookGenre", genre); // Pass the book author
             intent1.putExtra("bookRating", String.format("%.2f", rating)); // Pass the rating
             intent1.putExtra("bookReviewsCount", ratingsCount + " ratings"); // Pass the review count
             intent1.putExtra("bookCoverUrl", coverUrl);

@@ -2,6 +2,7 @@ package com.example.test;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,6 +60,7 @@ public class SignUp extends AppCompatActivity {
         nameEditText = findViewById(R.id.NameEditText);
         emailEditText = findViewById(R.id.EmailEditText);
         passwordEditText = findViewById(R.id.PasswordEditText);
+        passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         emailErrorText = findViewById(R.id.EmailErrorText);
         passwordErrorText = findViewById(R.id.PasswordErrorText);

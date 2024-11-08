@@ -113,6 +113,11 @@
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".AdminOverdueDashboard"
+            android:exported="true">
+        </activity>
+
 
     </application>
 

@@ -81,7 +81,8 @@
             android:hint="Enter Your Password"
             android:padding="15dp"
             android:textSize="15dp"
-            android:textStyle="italic"></EditText>
+            android:textStyle="italic"
+            android:inputType="textPassword"></EditText>
 
         <TextView
             android:id="@+id/PasswordErrorText"
