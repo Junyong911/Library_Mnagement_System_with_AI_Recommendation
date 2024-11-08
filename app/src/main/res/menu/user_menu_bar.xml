@@ -17,7 +17,7 @@
         android:icon="@drawable/baseline_search_24"/>
 
     <item
-        android:id="@+id/profile1"
+        android:id="@+id/setting"
         android:title="Setting"
         android:icon="@drawable/baseline_manage_accounts_24"/>
 </menu>

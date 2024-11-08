@@ -1,8 +1,10 @@
 package com.example.test;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -41,7 +44,7 @@ public class UserBookListPage extends AppCompatActivity {
 
     private LinearLayout alphabetScroller;
     private TextView selectedAlphabetOverlay;
-    private ImageButton searchIcon;
+    private ImageButton searchIcon, backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +141,45 @@ public class UserBookListPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showSearchDialog();
+            }
+        });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@android.support.annotation.NonNull MenuItem item) {
+
+
+                // Use if-else instead of switch-case
+                if (item.getItemId() == R.id.home) {
+                    // Stay on Home
+                    Intent intent = new Intent(UserBookListPage.this, UserHomePage.class);
+                    startActivity(intent);
+                    return true;
+                } else if (item.getItemId() == R.id.book) {
+                    // Navigate to Book Page
+                    Intent intent = new Intent(UserBookListPage.this, UserMyBooksPage.class);
+                    startActivity(intent);
+                } else if (item.getItemId() == R.id.search) {
+                    Intent intent = new Intent(UserBookListPage.this, UserSearchPage.class);
+                    startActivity(intent);
+                } else if (item.getItemId() == R.id.setting) {
+                    // Navigate to Settings Page
+                    Intent intent = new Intent(UserBookListPage.this, UserSearchPage.class);
+                    startActivity(intent);
+                }
+                return false;
+            }
+
+
+        });
+
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserBookListPage.this, UserSearchPage.class);
+                startActivity(intent);
             }
         });
 

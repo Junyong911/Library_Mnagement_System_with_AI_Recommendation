@@ -5,17 +5,23 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log; // Add import for logging
+import android.support.annotation.NonNull;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.palette.graphics.Palette;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,9 +38,10 @@ public class UserBookDetails extends AppCompatActivity {
     private AppCompatButton borrowButton;
     private FrameLayout bookCoverFrame;
     private RatingBar userRatingBar, averageRatingBar; // Add averageRatingBar for book rating
-
-    private DatabaseReference bookDatabaseReference;
+    private ImageButton backButton, bookmarkIcon;
+    private DatabaseReference bookDatabaseReference, bookmarksRef;
     private String userId;
+    private boolean isBookmarked = false;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -47,7 +54,7 @@ public class UserBookDetails extends AppCompatActivity {
         bookTitleTextView = findViewById(R.id.bookTitleTextView);
         bookAuthorTextView = findViewById(R.id.bookAuthorTextView);
         ratingTextView = findViewById(R.id.ratingTextView);
-
+        bookmarkIcon = findViewById(R.id.bookmarkIcon);
         bookCoverFrame = findViewById(R.id.bookCoverFrame);
         userRatingBar = findViewById(R.id.userRatingBar); // User's rating
         averageRatingBar = findViewById(R.id.averageRatingBar);
@@ -60,6 +67,8 @@ public class UserBookDetails extends AppCompatActivity {
 
         // Get the current user ID
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        bookmarksRef = FirebaseDatabase.getInstance().getReference("Bookmarks").child(userId);
 
         // Get data passed from the book list
         Intent intent = getIntent();
@@ -103,6 +112,20 @@ public class UserBookDetails extends AppCompatActivity {
             });
         }
 
+        checkIfBookIsBookmarked(bookId, bookmarkIcon);
+
+        // Set up bookmark icon click listener
+        bookmarkIcon.setOnClickListener(v -> {
+            if (isBookmarked) {
+                // Remove bookmark
+                removeBookmark(bookId, bookmarkIcon);
+            } else {
+                // Add bookmark
+                addBookmark(bookId, title, author, genre, coverUrl, rating, bookmarkIcon);
+            }
+        });
+
+
         // Fetch the current user's rating for this book
         fetchUserRating(bookId);
 
@@ -124,7 +147,8 @@ public class UserBookDetails extends AppCompatActivity {
 
             // Pass the book details to the borrow page
             intent1.putExtra("bookTitle", title); // Pass the book title
-            intent1.putExtra("bookAuthor", author); // Pass the book author
+            intent1.putExtra("bookAuthor", author);
+            intent1.putExtra("bookGenre", genre); // Pass the book author
             intent1.putExtra("bookRating", String.format("%.2f", rating)); // Pass the rating
             intent1.putExtra("bookReviewsCount", ratingsCount + " ratings"); // Pass the review count
             intent1.putExtra("bookCoverUrl", coverUrl);
@@ -135,6 +159,109 @@ public class UserBookDetails extends AppCompatActivity {
             startActivity(intent1);
         });
 
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@android.support.annotation.NonNull MenuItem item) {
+
+
+                // Use if-else instead of switch-case
+                if (item.getItemId() == R.id.home) {
+                    // Stay on Home
+                    Intent intent = new Intent(UserBookDetails.this, UserHomePage.class);
+                    startActivity(intent);
+                    return true;
+                } else if (item.getItemId() == R.id.book) {
+                    // Navigate to Book Page
+                    Intent intent = new Intent(UserBookDetails.this, UserMyBooksPage.class);
+                    startActivity(intent);
+                } else if (item.getItemId() == R.id.search) {
+                    Intent intent = new Intent(UserBookDetails.this, UserSearchPage.class);
+                    startActivity(intent);
+                } else if (item.getItemId() == R.id.setting) {
+                    // Navigate to Settings Page
+                    Intent intent = new Intent(UserBookDetails.this, UserSearchPage.class);
+                    startActivity(intent);
+                }
+                return false;
+            }
+
+
+        });
+    }
+
+    // Function to check if the book is bookmarked
+    private void checkIfBookIsBookmarked(String bookId, ImageButton bookmarkIcon) {
+        bookmarksRef.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                isBookmarked = dataSnapshot.exists(); // If the book exists in the bookmarks, it's bookmarked
+                updateBookmarkIcon(bookmarkIcon); // Update the icon based on bookmark status
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("UserBookDetails", "Failed to check if book is bookmarked", databaseError.toException());
+            }
+        });
+    }
+
+    // Function to add a bookmark
+    private void addBookmark(String bookId, String title, String author, String genre, String coverUrl, float rating, ImageButton bookmarkIcon) {
+        Bookmark bookmark = new Bookmark(bookId, title, author, genre, coverUrl, rating);
+
+        // Add bookmark to Firebase
+        bookmarksRef.child(bookId).setValue(bookmark)
+                .addOnSuccessListener(aVoid -> {
+                    isBookmarked = true; // Mark the book as bookmarked
+                    Toast.makeText(UserBookDetails.this, "Bookmarked successfully!", Toast.LENGTH_SHORT).show();
+                    updateBookmarkIcon(bookmarkIcon); // Update the icon
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(UserBookDetails.this, "Failed to bookmark. Try again.", Toast.LENGTH_SHORT).show();
+                    Log.e("UserBookDetails", "Failed to add bookmark", e);
+                });
+    }
+
+    // Function to remove a bookmark
+    private void removeBookmark(String bookId, ImageButton bookmarkIcon) {
+        bookmarksRef.child(bookId).removeValue()
+                .addOnSuccessListener(aVoid -> {
+                    isBookmarked = false; // Mark the book as not bookmarked
+                    Toast.makeText(UserBookDetails.this, "Bookmark removed successfully!", Toast.LENGTH_SHORT).show();
+                    updateBookmarkIcon(bookmarkIcon); // Update the icon
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(UserBookDetails.this, "Failed to remove bookmark. Try again.", Toast.LENGTH_SHORT).show();
+                    Log.e("UserBookDetails", "Failed to remove bookmark", e);
+                });
+    }
+
+    // Function to update the bookmark icon based on the bookmark status
+    private void updateBookmarkIcon(ImageButton bookmarkIcon) {
+        if (isBookmarked) {
+            bookmarkIcon.setImageResource(R.drawable.baseline_bookmark_added_24); // Set to filled bookmark icon
+        } else {
+            bookmarkIcon.setImageResource(R.drawable.baseline_bookmark_24); // Set to outline bookmark icon
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        // You can either call the default back behavior
+        super.onBackPressed();
+
+        // Or, you can add custom behavior if needed before calling super
+        // For example, showing a confirmation dialog before going back
     }
 
     // Fetch and display the current user's rating for this book
